@@ -19,7 +19,7 @@ test('get started link', async ({ page }) => {
 });
 
 
-test('test', async ({ page }) => {
+test('log into ML and shop for a Black Iphone 15 pro max with 256GB', async ({ page }) => {
   
 
   await page.goto('https://www.mercadolibre.com.mx/')
@@ -29,13 +29,16 @@ test('test', async ({ page }) => {
   await expect(page.locator('//ol[contains(@class, \'ui-search-layout\')]')).toBeVisible()
   //await page.pause()
 
-  const titles = await page.locator('//ol[contains(@class, \'ui-search-layout\')]//li//h2').allInnerTexts()
+  //const titles = await page.locator('//ol[contains(@class, \'ui-search-layout\')]//li//h2').allInnerTexts()
 
-  console.log('the total number of results is:', titles.length)
+  /*console.log('the total number of results is:', titles.length)
   for(let title of titles){
     console.log('the title is:', title)
-  }
-
+  }*/
+  await page.locator('a.ui-search-link[title="Apple iPhone 15 Pro Max (256 GB) - Titanio Negro - Distribuidor Autorizado"]').click()
+    await page.getByRole('button', { name: 'Comprar ahora' }).click();
+    await page.waitForSelector('h1.center-card__title');
+    //await page.pause()
   //await page.goto('https://www.mercadolibre.com.mx/');
 
   // Click the get started link.
