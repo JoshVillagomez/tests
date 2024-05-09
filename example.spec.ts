@@ -69,6 +69,6 @@ test('Replacing GetByRole instead Xpath/ccs', async ({ page }) => {
   await page.getByRole('heading', {name: 'Apple iPhone 15 Pro (128 GB) - Titanio Natural - Distribuidor autorizado'}).click();
   await page.getByRole('button', {name: 'Comprar ahora', exact:true}).click();
   await page.getByRole('heading', {name: '¡Hola! Para comprar, ingresa a tu cuenta', exact:true}).isVisible();
-  await page.pause()
+  await page.pause();
 
 });
