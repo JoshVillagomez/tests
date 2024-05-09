@@ -61,23 +61,14 @@ test('test locators getByRole', async ({ page }) => {
 });
 
 test('Replacing GetByRole instead Xpath/ccs', async ({ page }) => {
+ 
   await page.goto('https://www.mercadolibre.com.mx/')
-  //await page.locator('input[id=\'cb1-edit\']').fill('Iphone')
   await page.getByRole('combobox', {name: 'Ingresa lo que quieras encontrar', exact: true}).fill('Iphone');
   await page.keyboard.press('Enter')
-  //await expect(page.locator('//ol[contains(@class, \'ui-search-layout\')]')).toBeVisible()
   await page.getByRole('heading', {name: 'Iphone - Ofertas Hot Sale 2024'}).isVisible();
-  //await page.click('xpath=//a[@class="ui-search-item__group__element ui-search-link__title-card ui-search-link" and @title="Apple iPhone 15 Pro Max (256 GB) - Titanio Negro - Distribuidor Autorizado"]'); 
   await page.getByRole('heading', {name: 'Apple iPhone 15 Pro (128 GB) - Titanio Natural - Distribuidor autorizado'}).click();
-  //await page.locator('//button[@id=\':R15d3a6c4um:\']').click();
   await page.getByRole('button', {name: 'Comprar ahora', exact:true}).click();
-  //await page.waitForSelector('//h1[@class=\'center-card__title\']');
   await page.getByRole('heading', {name: '¡Hola! Para comprar, ingresa a tu cuenta', exact:true}).isVisible();
   await page.pause()
 
-
-  /*await page.goto('https://www.mercadolibre.com.mx');
-  await page.getByRole('link', {name: 'Ingresa', exact:true}).click();
-  await page.pause();
-*/
 });
