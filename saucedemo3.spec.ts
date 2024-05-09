@@ -27,14 +27,44 @@ test('purchase and item as STANDAR USER', async ({page}) => {
     //Assert Checkout Button visible
     expect(page.getByRole('button', {name: 'Checkout'})).toBeVisible();
     
+    //Assert Name, Description, Price to be the same as the ones displayed in the items page
     const actualDescription = await page.locator('.inventory_item_desc').innerText();
     const actualName = await page.locator('.inventory_item_name').innerText();
     const actualPrice = await page.locator('.inventory_item_price').innerText();
 
     console.log(`APrice: ${actualPrice} AName: ${actualName} ADescription: ${actualDescription}`)
-    //Assert Name, Description, Price to be the same as the ones displayed in the items page
+    
     expect(actualDescription).toEqual(expectedDescription);
     expect(actualName).toEqual(expectedName);
     expect(actualPrice).toEqual(expectedPrice);
-    //await page.pause();
+    
+    await page.getByRole('button', {name: 'Checkout'}).click();
+    await page.getByRole('textbox', {name: 'First Name'}).fill('Vegeta');
+    await page.getByRole('textbox', {name: 'Last Name'}).fill('Saiyan');
+    await page.getByRole('textbox', {name: 'Zip/Postal Code'}).fill('97320');
+    await page.getByRole('button', {name: 'Continue'}).click();
+    
+    //Assert Name, Description, Price to be the same as the ones displayed in the checkout page
+    const checkoutDescription = await page.locator('.inventory_item_desc').innerText();
+    const checkoutName = await page.locator('.inventory_item_name').innerText();
+    const checkoutPrice = await page.locator('.inventory_item_price').innerText();
+
+    console.log(`CPrice: ${checkoutPrice} CName: ${checkoutName} CDescription: ${checkoutDescription}`);
+    
+    expect(checkoutDescription).toEqual(expectedDescription);
+    expect(checkoutName).toEqual(expectedName);
+    expect(checkoutPrice).toEqual(expectedPrice);
+
+    await page.getByRole('button', {name: 'Finish'}).click();
+
+    //Assert Green Check and Thank for your order! message are displayed in the page.
+    expect(page.getByRole('heading', {name: 'Thank you for your order!'})).toBeVisible();
+
+
+
+
+
+
+
+
 });
