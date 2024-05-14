@@ -2,6 +2,13 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from './pageobjects/LoginPage';
 import { log } from 'console';
 
+
+
+test('navigate', async ({ page }) => {
+    await page.goto(process.env.URL)
+    await page.pause()
+})
+
 test('purchase and item as STANDAR USER', async ({page}) => {
 
     await page.goto('https://www.saucedemo.com');
@@ -14,7 +21,8 @@ test('purchase and item as STANDAR USER', async ({page}) => {
     await loginPage.fillPassword('secret_sauce');
     await loginPage.clickOnLogin();*/
 
-    await loginPage.loginWithCredentials('standard_user', 'secret_sauce')
+    await loginPage.loginWithCredentials('standard_user', 'secret_sauce');
+    await loginPage.checkSuccessfulLogin();
 
     const itemsContainer = await page.locator('#inventory_container .inventory_item').all();
 
@@ -67,6 +75,8 @@ test('purchase and item as STANDAR USER', async ({page}) => {
 
     //Assert Green Check and Thank for your order! message are displayed in the page.
     expect(page.getByRole('heading', {name: 'Thank you for your order!'})).toBeVisible();
+
+    await page.pause();
 
 
 
