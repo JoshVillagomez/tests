@@ -22,7 +22,10 @@ test('purchase and item as STANDAR USER', async ({page}) => {
     await loginPage.clickOnLogin();*/
 
     await loginPage.loginWithCredentials('standard_user', 'secret_sauce');
+    //await page.screenshot({path: 'screenshots/login.png', fullPage: true})
     await loginPage.checkSuccessfulLogin();
+
+    
 
     const itemsContainer = await page.locator('#inventory_container .inventory_item').all();
 
@@ -76,7 +79,7 @@ test('purchase and item as STANDAR USER', async ({page}) => {
     //Assert Green Check and Thank for your order! message are displayed in the page.
     expect(page.getByRole('heading', {name: 'Thank you for your order!'})).toBeVisible();
 
-    await page.pause();
+    //await page.pause();
 
 
 
